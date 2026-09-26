@@ -8,7 +8,7 @@ export default defineConfig({
   name: 'default',
   title: 'v3EffectClient',
 
-  projectId: 'fz760flz',
+  projectId: 'wpmcd7jc',
   dataset: 'v3-effect-client-ds',
 
   plugins: [
