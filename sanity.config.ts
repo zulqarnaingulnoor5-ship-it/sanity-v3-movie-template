@@ -15,6 +15,7 @@ export default defineConfig({
     deskTool(),
     visionTool(),
     //googleMapsInput(),
+    
   ],
 
   schema: {
