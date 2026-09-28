@@ -9,7 +9,7 @@ export default defineConfig({
   title: 'v3EffectClient',
 
   projectId: 'wpmcd7jc',
-  dataset: 'v3-effect-client-ds',
+  dataset: 'production',
 
   plugins: [
     deskTool(),
