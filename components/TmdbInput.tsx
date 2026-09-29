@@ -12,6 +12,10 @@ export const TmdbInput = (props: any) => {
   // Yahan SANITY_STUDIO_ prefix add kiya gaya hai API key ko theek se read karne ke liye
   const TMDB_API_KEY = process.env.SANITY_STUDIO_TMDB_API_KEY
 
+// just to check that the error is in the console and  is the api is fetching or not
+  console.log('TMDB_API_KEY:', TMDB_API_KEY);
+  
+
   const fetchMovieData = useCallback(async () => {
     if (!value) return
     setLoading(true)
