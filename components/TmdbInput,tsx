@@ -9,8 +9,8 @@ export const TmdbInput = (props: any) => {
   const documentId = useFormValue(['_id']) as string
   const client = useClient({ version: '2023-01-01' })
 
-  // Yahan par apni API key paste karni hai
-  const TMDB_API_KEY = process.env.TMDB_API_KEY
+  // Yahan SANITY_STUDIO_ prefix add kiya gaya hai API key ko theek se read karne ke liye
+  const TMDB_API_KEY = process.env.SANITY_STUDIO_TMDB_API_KEY
 
   const fetchMovieData = useCallback(async () => {
     if (!value) return
@@ -18,7 +18,7 @@ export const TmdbInput = (props: any) => {
     
     try {
       const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${value}`)
-      const data = await res.json()
+      const data = await line res.json()
 
       if (data.results && data.results.length > 0) {
         const movie = data.results[0]
