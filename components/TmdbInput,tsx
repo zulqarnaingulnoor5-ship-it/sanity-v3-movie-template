@@ -10,7 +10,7 @@ export const TmdbInput = (props: any) => {
   const client = useClient({ version: '2023-01-01' })
 
   // Yahan par apni API key paste karni hai
-  const TMDB_API_KEY = '7a02dc844f0cc76cfc7a270ecdc0a85a'
+  const TMDB_API_KEY = process.env.TMDB_API_KEY
 
   const fetchMovieData = useCallback(async () => {
     if (!value) return
