@@ -7,7 +7,7 @@ export const TmdbInput = (props: any) => {
   const [loading, setLoading] = useState(false)
   
   const documentId = useFormValue(['_id']) as string
-  const client = useClient({ version: '2023-01-01' })
+  const client = useClient({ apiVersion: '2021-06-07' })
 
   // Yahan SANITY_STUDIO_ prefix add kiya gaya hai API key ko theek se read karne ke liye
   const TMDB_API_KEY = process.env.SANITY_STUDIO_TMDB_API_KEY
