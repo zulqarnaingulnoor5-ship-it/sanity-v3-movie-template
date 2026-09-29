@@ -1,5 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {MdLocalMovies as icon} from 'react-icons/md'
+import { TmdbInput } from '../components/TmdbInput'
 
 export default defineType({
   name: 'movie',
@@ -11,6 +12,9 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
+      components: {
+        input: TmdbInput,
+      },
     }),
     defineField({
       name: 'slug',
