@@ -18,7 +18,7 @@ export const TmdbInput = (props: any) => {
     
     try {
       const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${value}`)
-      const data = await line res.json()
+      const data = await res.json()
 
       if (data.results && data.results.length > 0) {
         const movie = data.results[0]
