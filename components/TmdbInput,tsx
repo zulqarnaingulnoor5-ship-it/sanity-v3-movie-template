@@ -1,0 +1,64 @@
+import React, { useState, useCallback } from 'react'
+import { TextInput, Button, Flex, Box } from '@sanity/ui'
+import { set, unset, useClient, useFormValue } from 'sanity'
+
+export const TmdbInput = (props: any) => {
+  const { value, onChange } = props
+  const [loading, setLoading] = useState(false)
+  
+  const documentId = useFormValue(['_id']) as string
+  const client = useClient({ version: '2023-01-01' })
+
+  // Yahan par apni API key paste karni hai
+  const TMDB_API_KEY = '7a02dc844f0cc76cfc7a270ecdc0a85a'
+
+  const fetchMovieData = useCallback(async () => {
+    if (!value) return
+    setLoading(true)
+    
+    try {
+      const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${value}`)
+      const data = await res.json()
+
+      if (data.results && data.results.length > 0) {
+        const movie = data.results[0]
+        
+        const docId = documentId?.replace('drafts.', '') || documentId
+
+        await client.patch(docId)
+          .set({
+            overview: movie.overview,
+            releaseDate: movie.release_date,
+          })
+          .commit()
+
+        alert('Details successfully aa gayi hain!')
+      } else {
+        alert('Is naam ki koi movie nahi mili!')
+      }
+    } catch (err) {
+      console.error(err)
+      alert('Details laane mein error aaya.')
+    } finally {
+      setLoading(false)
+    }
+  }, [value, client, documentId])
+
+  return (
+    <Flex gap={3} align="center">
+      <Box flex={1}>
+        <TextInput
+          value={value || ''}
+          onChange={(event) => onChange(event.currentTarget.value ? set(event.currentTarget.value) : unset())}
+          placeholder="Movie ka naam likho..."
+        />
+      </Box>
+      <Button
+        mode="ghost"
+        text={loading ? 'Searching...' : 'Fetch TMDb Details'}
+        onClick={fetchMovieData}
+        disabled={loading || !value}
+      />
+    </Flex>
+  )
+}
