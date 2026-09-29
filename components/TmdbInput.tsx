@@ -17,7 +17,7 @@ export const TmdbInput = (props: any) => {
     setLoading(true)
     
     try {
-      const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${SANITY_STUDIO_TMDB_API_KEY}&query=${value}`)
+      const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.SANITY_STUDIO_TMDB_API_KEY}&query=${value}`)
       const data = await res.json()
 
       if (data.results && data.results.length > 0) {
